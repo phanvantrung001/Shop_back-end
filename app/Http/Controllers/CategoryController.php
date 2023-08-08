@@ -12,13 +12,12 @@ class CategoryController extends Controller
 {
     public function index()
     {  
-        $categories = Category::paginate(3);
-        $categories = Category::get();
-        return view('categories.index', compact('categories'));
+        $categories = Category::paginate(4);
+        return view('admin.categories.index', compact('categories'));
     }
     public function create()
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
     public function store(StoreCategoryRequest $request)
     {
@@ -35,7 +34,7 @@ class CategoryController extends Controller
     public function edit(String $id)
     {
         $category = Category::find($id);
-        return view('categories.edit', compact(['category']));
+        return view('admin.categories.edit', compact(['category']));
     }
     public function update(Request $request, $id)
     {
@@ -64,7 +63,7 @@ class CategoryController extends Controller
     {
         try {
             $softs = Category::onlyTrashed()->get();
-            return view('categories.trash', compact('softs'));
+            return view('admin.categories.trash', compact('softs'));
         } catch (\Exception $e) {
             alert()->warning('Lỗi');
             return back();

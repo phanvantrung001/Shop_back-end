@@ -24,11 +24,11 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:15',
+            'name' => 'required|min:3|max:100',
             'price' => 'required|numeric|',
             'quantity'=>'required|numeric',
             'category_id' => 'required|numeric',
-            'mota' => 'required',
+            'description' => 'required',
 
         ];
     }
@@ -43,7 +43,7 @@ class StoreProductRequest extends FormRequest
             'quantity.required'=> 'k duoc de trong',
             'quantity.numeric'=> 'khong phai la so',
             'category_id.required'=> 'k duoc de trong',
-            'mota.required'=> 'k duoc de trong',
+            'description.required'=> 'k duoc de trong',
 
         ];
     }

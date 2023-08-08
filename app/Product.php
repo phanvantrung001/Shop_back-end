@@ -11,6 +11,6 @@ class Product extends Model
     use Notifiable;
     protected $table = 'products';
     public function category(){
-        return $this->belongsTo(Category::class,'category_id','id')->withTrashed();;
+        return $this->belongsTo(Category::class,'category_id','id');
     }
 }

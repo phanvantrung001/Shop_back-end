@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){ 
+    try {
+        $this->authorize('viewAny',User::class);
         $users = User::get();
-        return view('users.index',compact('users'));
+        return view('admin.users.index',compact('users'));
+    } catch (\Exception $e) {
+        alert()->warning('Have problem! Please try again late');
+        return back();
+    }
     }
     public function create(){
-        return view('users.create');
+        return view('admin.users.create');
     }
     public function store(Request $request){
         $validated = $request->validate(
@@ -38,7 +44,7 @@ class UserController extends Controller
     }
     public function edit(String $id){
         $user = User::find($id);
-        return view('users.edit',compact(['user']));
+        return view('admin.users.edit',compact(['user']));
     }
     public function update(Request $request,$id){
         $user = User::find($id);

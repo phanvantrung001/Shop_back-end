@@ -3,11 +3,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\shop\ShopController;
+
+
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
-
-
+use App\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +34,11 @@ Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 Route::post('/checklogin',[AuthController::class,'checkLogin'])->name('auth.checklogin');
 Route::get('/register',[AuthController::class,'register'])->name('auth.register');
 Route::post('/checkRegister',[AuthController::class,'checkRegister'])->name('auth.checkRegister');
+//SHOP
+Route::get('/home',[ShopController::class,'home'])->name('home.index');
+
 
 Route::middleware(['auth','preventhistory'])->group(function(){
-Route::get('/', function () {
-    return view('layout.master'); 
-    
-});
 Route::get('/user',[UserController::class,'index'])->name('user.index');
 Route::get('/user/create',[UserController::class,'create'])->name('user.create');
 Route::get('/user/{id}/edit',[UserController::class,'edit'])->name('user.edit');
@@ -46,13 +50,23 @@ Route::delete('/user/{id}/destroy',[UserController::class,'destroy'])->name('use
 // Route::get('/category',function(){
 //     dd(10);
 // });
-Route::get('/customer',[customerController::class,'index'])->name('customer.index');
-Route::get('/customer/create',[customerController::class,'create'])->name('customer.create');
-Route::get('/customer/{id}/edit',[customerController::class,'edit'])->name('customer.edit');
-Route::get('/customer/show',[customerController::class,'show'])->name('customer.show');
-Route::post('/customer/store',[customerController::class,'store'])->name('customer.store');
-Route::put('/customer/{id}/update',[customerController::class,'update'])->name('customer.update');
-Route::delete('/customer/{id}/destroy',[customerController::class,'destroy'])->name('customer.destroy');
+Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
+Route::get('/customer/create',[CustomerController::class,'create'])->name('customer.create');
+Route::get('/customer/{id}/edit',[CustomerController::class,'edit'])->name('customer.edit');
+Route::get('/customer/show',[CustomerController::class,'show'])->name('customer.show');
+Route::post('/customer/store',[CustomerController::class,'store'])->name('customer.store');
+Route::put('/customer/{id}/update',[CustomerController::class,'update'])->name('customer.update');
+Route::delete('/customer/{id}/destroy',[CustomerController::class,'destroy'])->name('customer.destroy');
+
+
+Route::get('/order',[OrderController::class,'index'])->name('order.index');
+Route::get('/order/create',[OrderController::class,'create'])->name('order.create');
+Route::get('/order/{id}/edit',[OrderController::class,'edit'])->name('order.edit');
+Route::get('/order/{id}/show',[OrderController::class,'show'])->name('order.show');
+Route::post('/order/store',[OrderController::class,'store'])->name('order.store');
+Route::put('/order/{id}/update',[OrderController::class,'update'])->name('order.update');
+Route::delete('/order/{id}/destroy',[OrderController::class,'destroy'])->name('order.destroy');
+
 
 Route::get('/category',[CategoryController::class,'index'])->name('category.index');
 Route::get('/category/create',[CategoryController::class,'create'])->name('category.create');
@@ -75,3 +89,11 @@ Route::post('/product/store',[ProductController::class,'store'])->name('product.
 Route::put('/product/{id}/update',[ProductController::class,'update'])->name('product.update');
 Route::delete('/product/{id}/destroy',[ProductController::class,'destroy'])->name('product.destroy');
 });
+// dn dk shop
+// Đăng ký
+// Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('/register', 'Auth\RegisterController@register');
+
+// Đăng nhập
+// Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+// Route::post('/login', 'Auth\LoginController@login');

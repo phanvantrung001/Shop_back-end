@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Traits\HasPermissions;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -36,4 +37,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected $table = 'users';
+
+    public function group(){
+        return $this->belongsto(Group::class,'group_id','id');
+    }
 }

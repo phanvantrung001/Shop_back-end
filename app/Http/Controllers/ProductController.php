@@ -11,16 +11,15 @@ use Illuminate\Http\Request;
 class productController extends Controller
 {
     public function index(){   
-        $products = Product::with('category')->get();
+        $products = Product::with('category')->paginate(3);
         // dd($products);
-        return view('products.index',compact('products'));
+        return view('admin.products.index',compact('products'));
     }
     public function create(){
         $categories = Category::get();
-        return view('products.create',compact('categories'));
+        return view('admin.products.create',compact('categories'));
     }
     public function store(StoreProductRequest $request){
-        //  dd($request);
        $product = new Product();
        $product->name = $request->name;
        $product->slug = $request->slug;
@@ -48,7 +47,7 @@ class productController extends Controller
     public function edit(String $id){
         $categories = Category::get();
         $product = Product::find($id);
-        return view('products.edit',compact(['product']),compact('categories'));
+        return view('admin.products.edit',compact(['product']),compact('categories'));
     }
     public function update(Request $request,$id){
         $product = Product::find($id);
@@ -67,9 +66,9 @@ class productController extends Controller
        if ($request->hasFile($fieldName)) {
            $get_img = $request->file($fieldName);
            $path = 'storage/product/';
-           $new_name_img = $request->name.$get_img->getClientOriginalName();
+           $new_name_img = rand(1,100).$get_img->getClientOriginalName();
            $get_img->move($path,$new_name_img);
-           $product->img = $path.$new_name_img;
+           $product->img = $path.$new_name_img; 
        }
         $product->save();
         alert()->success('Cập nhật thành công');
@@ -80,6 +79,42 @@ class productController extends Controller
         $product = Product::find($id);
         $product->delete();
         return redirect()->route('product.index');
+        alert()->warning('Have problem! Please try again late');
+            return back();
+    }
+    function trash()
+    {
+        try {
+            $softs = Category::onlyTrashed()->get();
+            return view('categories.trash', compact('softs'));
+        } catch (\Exception $e) {
+            alert()->warning('Lỗi');
+            return back();
+        }
+    }
+    function restore(String $id)
+    {
+        try {
+            $softs = Category::withTrashed()->find($id);
+            $softs->restore();
+            alert()->success('Khôi Phục thành công');
+            return redirect()->route('category.index');
+        } catch (\Exception $e) {
+            alert()->warning('Lỗi');
+            return redirect()->route('category.index');
+        }
+    }
+    function deleteforever(String $id)
+    {
+        try {
+            $softs = Category::withTrashed()->find($id);
+            $softs->forceDelete();
+            alert()->success('Xoá thành công');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            alert()->warning('Lỗi');
+            return back();
+        }
     }
 }
 

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     function login(){
-        return view('auth.login');    
+        return view('admin.auth.login');    
     }
     function checkLogin(Request $request) {
         $arr = [
@@ -39,7 +39,7 @@ class AuthController extends Controller
     }
     public function register()
     {
-        return view('auth.login');
+        return view('admin.auth.login');
     }
     public function checkRegister(Request $request)
     {
