@@ -8,15 +8,19 @@ class UserController extends Controller
 {
     public function index(){ 
     try {
+        $users = User::with('group')->get();
         $this->authorize('viewAny',User::class);
-        $users = User::get();
-        return view('admin.users.index',compact('users'));
+        $param = [
+            'users' => $users,  
+        ];
+        return view('admin.users.index',$param);
     } catch (\Exception $e) {
         alert()->warning('Have problem! Please try again late');
         return back();
     }
     }
     public function create(){
+        $this->authorize('viewAny',User::class);
         return view('admin.users.create');
     }
     public function store(Request $request){
@@ -39,10 +43,13 @@ class UserController extends Controller
        $user->name = $request->name;
        $user->email = $request->email;
        $user->password = bcrypt($request->password);
+       $user->group_id = $request->group_id;
        $user->save();
        return redirect()->route('user.index');
     }
     public function edit(String $id){
+        $this->authorize('viewAny',User::class);
+
         $user = User::find($id);
         return view('admin.users.edit',compact(['user']));
     }
@@ -56,6 +63,8 @@ class UserController extends Controller
     }
     
     public function destroy($id){
+        $this->authorize('viewAny',User::class);
+
         $user = User::find($id);
         $user->delete();
         return redirect()->route('user.index');

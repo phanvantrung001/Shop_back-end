@@ -21,7 +21,7 @@
             <div class="col">
               <input type="text" placeholder="Nhập tên" class="form-control">
             </div>
-          
+
             <div class="col">
               <button type="button" class="btn btn-info"> Tìm </button>
               <button type="button" class="btn btn-secondary "> Đặt lại </button>
@@ -37,21 +37,23 @@
                 <th>TT</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Chức vụ</th>
                 <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
-      @foreach($users as $key => $user)
+              @foreach($users as $key => $user)
               <tr>
                 <td>{{$key+1}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
+                <td>{{$user->group ? $user->group->name : ''}}</td>
                 <td>
                   <a href="#" class="btn btn-info">Sửa</a>
                   <button type="button" class="btn btn-danger"> Xóa </button>
                 </td>
               </tr>
-      @endforeach
+              @endforeach
             </tbody>
           </table>
         </div>

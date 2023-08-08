@@ -15,13 +15,12 @@ class AuthController extends Controller
     function login(){
         return view('admin.auth.login');    
     }
-    function checkLogin(Request $request) {
+    function checklogin(Request $request) {
         $arr = [
             'email' => $request->email,
             'password' => $request->password,
         ];
         $user = User::where('email',$request->email)->first();
-        // dd($user);
         if ($user && Hash::check($request->password, $user->password) && Auth::attempt($arr)) {
             $request->session()->put('login', true);
             alert()->success('Success Login');

@@ -1,6 +1,6 @@
 <?php
 namespace App\Traits;
-use App\Models\Role;
+use App\Role;
 trait HasPermissions
 {
     protected $permissionList = null;
@@ -21,7 +21,7 @@ trait HasPermissions
     private function getPermissions()
     {
         $this->permissionList = $this->group->role;
-        // dd($this->permissionList);
+        // dd($this->permissionList);   
         return $this->permissionList ?? collect();
     }
 }

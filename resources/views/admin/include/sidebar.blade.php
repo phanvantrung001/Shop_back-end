@@ -37,6 +37,9 @@
 								<a class="nav-link" href="{{route('user.index')}}" >Danh sách</a>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link" href="{{route('group.index')}}">Nhóm</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="/index.html">Thùng rác</a>
 							</li>
 						</ul>
@@ -114,6 +117,7 @@
 						</ul>
 					</div>
 				</li>
+				
 				<li class="nav-item">
 					<a class="nav-link" href="pages/icons/mdi.html">
 						<i class="mdi mdi-contacts menu-icon"></i>

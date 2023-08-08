@@ -12,11 +12,13 @@ class CategoryController extends Controller
 {
     public function index()
     {  
+        $this->authorize('viewAny',Category::class);
         $categories = Category::paginate(4);
         return view('admin.categories.index', compact('categories'));
     }
     public function create()
     {
+        $this->authorize('create',Category::class);
         return view('admin.categories.create');
     }
     public function store(StoreCategoryRequest $request)
@@ -34,6 +36,7 @@ class CategoryController extends Controller
     public function edit(String $id)
     {
         $category = Category::find($id);
+        $this->authorize('update',$category);
         return view('admin.categories.edit', compact(['category']));
     }
     public function update(Request $request, $id)
@@ -51,6 +54,7 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::find($id);
+            $this->authorize('delete',$category);
             $category->delete();
             alert()->success('delete success');
             return redirect()->route('category.index');
@@ -61,18 +65,20 @@ class CategoryController extends Controller
     }
     function trash()
     {
-        try {
+        // try {
             $softs = Category::onlyTrashed()->get();
+            $this->authorize('viewTrash',$softs);
             return view('admin.categories.trash', compact('softs'));
-        } catch (\Exception $e) {
-            alert()->warning('Lỗi');
-            return back();
-        }
+        // } catch (\Exception $e) {
+        //     alert()->warning('Lỗi');
+        //     return back();
+        // }
     }
     function restore(String $id)
     {
         try {
             $softs = Category::withTrashed()->find($id);
+            $this->authorize('restore',$softs);
             $softs->restore();
             alert()->success('Khôi Phục thành công');
             return redirect()->route('category.index');
@@ -84,7 +90,9 @@ class CategoryController extends Controller
     function deleteforever(String $id)
     {
         try {
+            
             $softs = Category::withTrashed()->find($id);
+            $this->authorize('forceDelete',$softs);
             $softs->forceDelete();
             alert()->success('Xoá thành công');
             return redirect()->back();

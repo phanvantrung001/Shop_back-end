@@ -8,7 +8,11 @@
       <div class="card-header">
         <form action="" method="get">
           <div class="row mb-2">
-            <div class="col"> <a href="{{route('category.create')}}" class="btn btn-primary"> Thêm mới </a> <button type="button" class="btn btn-success "> Xuất execl </button> </div>
+            <div class="col">
+               @if (Auth::user()->hasPermission('Category_create'))  
+              <a href="{{ route('category.create') }}" class="btn btn-primary"> Thêm mới </a>
+               @endif 
+            </div>
           </div>
           <div class="row">
             <div class="col">

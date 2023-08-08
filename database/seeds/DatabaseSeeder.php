@@ -2,7 +2,6 @@
 
 use App\Customer;
 use Illuminate\Database\Seeder;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -17,11 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CustomersSeeder::class);
         $this->call(OrderSeeder::class);
         $this->call(UsersSeeder::class);
+        $this->call(GroupSeeder::class);
 
-        
-
-    }
-    function UserSeeder(){
-        
     }
 }

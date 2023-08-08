@@ -11,7 +11,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $tables = ['users', 'categories', 'products','customers','orders','orderdetails'];
+        $tables = ['users', 'categories', 'products','customers','orders','orderdetails','groups'];
         $actions = ['viewAny','view','create','update','delete','restore','forceDelete'];
         foreach($tables as $table){
             foreach($actions as $action){
