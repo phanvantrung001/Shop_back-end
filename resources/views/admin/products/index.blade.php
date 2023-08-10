@@ -42,7 +42,6 @@
                 <th>gia</th>
                 <th>so lượng</th>
                 <th>trạng thái</th>
-
                 <th>Hành động</th>
               </tr>
             </thead>
@@ -52,7 +51,7 @@
                 <td>{{$key+1}}</td>
                 <td><img src="{{asset($product->img)}}" alt=""></td>  
                 <td>{{$product->name}}</td>
-                <td>{{$product->category->name}}</td>
+                <td>{{$product->category ? $product->category->name : ''}}</td>
                 <td>{{$product->price}}</td>
                 <td>{{$product->quantity}}</td>
                 <td>

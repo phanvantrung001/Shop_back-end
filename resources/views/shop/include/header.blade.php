@@ -1,4 +1,44 @@
+<style>
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-info h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .user-info span {
+        color: #007bff;
+        margin-left: 5px;
+    }
+
+    .logout-btn {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 8px 15px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .login-btn {
+        display: inline-block;
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+    }
+</style>
  <!-- Topbar Start -->
+
+ 
  <div class="container-fluid">
      <div class="row bg-secondary py-1 px-xl-5">
          <div class="col-lg-6 d-none d-lg-block">
@@ -26,15 +66,20 @@
                          <button class="dropdown-item" type="button">CAD</button>
                      </div>
                  </div>
+                 <div class="col-lg-4 text-right">
+         
+        </div>
                  <div class="btn-group">
                      <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
                      <div class="dropdown-menu dropdown-menu-right">
                          <button class="dropdown-item" type="button">FR</button>
                          <button class="dropdown-item" type="button">AR</button>
                          <button class="dropdown-item" type="button">RU</button>
+                         
                      </div>
                  </div>
              </div>
+          
              <div class="d-inline-flex align-items-center d-block d-lg-none">
                  <a href="" class="btn px-0 ml-2">
                      <i class="fas fa-heart text-dark"></i>
@@ -50,7 +95,7 @@
      <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
          <div class="col-lg-4">
              <a href="" class="text-decoration-none">
-                 <span class="h1 text-uppercase text-primary bg-dark px-2">Tobacco</span>
+                 <span class="h1 text-uppercase text-primary bg-dark px-2">lipstick</span>
                  <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
              </a>
          </div>
@@ -65,13 +110,17 @@
                      </div>
                  </div>
              </form>
+             
          </div>
          <div class="col-lg-4 col-6 text-right">
              <p class="m-0">Chăm sóc khách hàng</p>
              <h5 class="m-0">+0388 174 174</h5>
+             
          </div>
      </div>
  </div>
+ 
+
  <!-- Topbar End -->
  
  <div class="container-fluid bg-dark mb-30">
@@ -103,6 +152,7 @@
                  </div>
              </nav>
          </div>
+         
          <div class="col-lg-9">
              <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                  <a href="" class="text-decoration-none d-block d-lg-none">

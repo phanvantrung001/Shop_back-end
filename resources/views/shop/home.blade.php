@@ -1,5 +1,15 @@
+<style>
+    .out-of-stock-heading {
+        font-size: 100px;
+        font-weight: bold;
+        color: red;
+        margin: 0;
+        padding: 0;
+    }
+</style>
 @extends('shop.layout.master')
 @section('content')
+@include('sweetalert::alert')
 
 <div class="container-fluid mb-3">
     <div class="row px-xl-5">
@@ -12,32 +22,11 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item position-relative active" style="height: 430px;">
-                        <img class="position-absolute w-100 h-100" src="{{asset('shop/img/xi-ga.jpeg')}}" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="{{asset('shop/img/cach-3.jpeg')}}" style="object-fit: cover;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">let's smoke</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item position-relative" style="height: 430px;">
-                        <img class="position-absolute w-100 h-100" src="{{asset('shop/img/carousel-2.jpg')}}" style="object-fit: cover;">
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women Fashion</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item position-relative" style="height: 430px;">
-                        <img class="position-absolute w-100 h-100" src="{{asset('shop/img/carousel-3.jpg')}}" style="object-fit: cover;">
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids Fashion</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">sale 10%</h1>
+                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Vẻ đẹp k nằm trên đôi môi của người phụ nữ mà nằm ở dôi mắt của kẻ si tình!</p>
                             </div>
                         </div>
                     </div>
@@ -46,19 +35,17 @@
         </div>
         <div class="col-lg-4">
             <div class="product-offer mb-30" style="height: 200px;">
-                <img class="img-fluid" src="{{asset('shop/img/hu.jpeg')}}" alt="">
+                <img class="img-fluid" src="{{asset('shop/img/son.jpeg')}}" alt="">
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 20%</h6>
                     <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-primary">Shop Now</a>
                 </div>
             </div>
             <div class="product-offer mb-30" style="height: 200px;">
-                <img class="img-fluid" src="{{asset('shop/img/hut.jpeg')}}" alt="">
+                <img class="img-fluid" src="{{asset('shop/img/abc.jpg')}}" alt="">
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 20%</h6>
                     <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-primary">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -94,7 +81,7 @@
 
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Xì gà cohiba</span></span></h2>
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sản Phẩn </span></span></h2>
         <div class="row px-xl-5">
             @foreach ($products as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
@@ -102,20 +89,32 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{ asset($product->img) }}" alt="img">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            @if ($product->status == 1)
+                            <a class="btn btn-outline-dark btn-square add-to-cart-btn" 
+                            data-product-id="{{ $product->id }}" href="#"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="{{route('shop.show',$product->id) }}"><i class="fa fa-search"></i></a>
+                            @else
+                            <div class="out-of-stock-label">
+                                <h2><strong><em style="color: red;"></em></strong></h2>
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">{{$product->name}}</a>
+                        <a class="h6 text-decoration-none text-truncate" href="">{{ $product->name }}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>${{$product->price}}</h5>
-                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h5>{{ str_replace(',', '.', number_format(floatval($product->price))) . ' VND' }}</h5>
+                        </div>
+                        <div class="text-center py-0">
+                            @if ($product->status == 1)
+                            <h6>Còn hàng</h6>
+                            @elseif ($product->status == 0)
+                            <h6>Hết hàng</h6>
+                            @elseif ($product->status == 2)
+                            <h6>Đang nhập hàng</h6>
+                            @endif
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>

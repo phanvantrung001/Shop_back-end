@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\Group;
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -20,8 +22,9 @@ class UserController extends Controller
     }
     }
     public function create(){
+        $groups = Group::get();
         $this->authorize('viewAny',User::class);
-        return view('admin.users.create');
+        return view('admin.users.create',compact('groups'));
     }
     public function store(Request $request){
         $validated = $request->validate(
@@ -45,6 +48,7 @@ class UserController extends Controller
        $user->password = bcrypt($request->password);
        $user->group_id = $request->group_id;
        $user->save();
+       alert()->success('Thành Công');
        return redirect()->route('user.index');
     }
     public function edit(String $id){

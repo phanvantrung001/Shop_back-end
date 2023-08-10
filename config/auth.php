@@ -73,7 +73,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        'customer' => [
+        'customers' => [
             'driver' => 'eloquent',
             'model' => App\Customer::class,
         ],
@@ -99,6 +99,12 @@ return [
     */
 
     'passwords' => [
+        'customers' => [
+            'provider' => 'customers',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',

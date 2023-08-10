@@ -38,8 +38,17 @@ Route::post('/checklogin',[AuthController::class,'checklogin'])->name('auth.chec
 Route::get('/register',[AuthController::class,'register'])->name('auth.register');
 Route::post('/checkRegister',[AuthController::class,'checkRegister'])->name('auth.checkRegister');
 //SHOP
-Route::get('/home',[ShopController::class,'home'])->name('home.index');
+Route::group(['prefix' => 'shop'],function(){
+    Route::get('/register', [ShopController::class,'register'])->name('shop.register');
+    Route::post('/checkregister', [ShopController::class,'checkregister'])->name('shop.checkregister');
+    Route::get('/login', [ShopController::class, 'login'])->name('shop.login');
+    Route::post('/checklogin', [ShopController::class,'checklogin'])->name('shop.checklogin');
+    Route::get('/logout ', [ShopController::class,'logout'])->name('logout');
+    Route::get('/home', [ShopController::class,'home'])->name('home.index');
+    Route::get('/{id}/show', [ShopController::class,'show'])->name('shop.show');
 
+});
+    
 
 Route::middleware(['auth','preventhistory'])->group(function(){
     Route::get('/user',[UserController::class,'index'])->name('user.index');
