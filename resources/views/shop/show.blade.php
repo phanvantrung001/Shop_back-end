@@ -18,8 +18,8 @@
                 </h3>
 
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <a class="btn btn-success add-to-cart-btn" href="#" data-product-id="{{ $product->id }}">
-                        <i class="fa fa-shopping-cart mr-2"></i> Thêm vào giỏ hàng
+                    <a class="btn btn-success add-to-cart-btn" data-url="{{ route('shop.addtocart',$product->id)  }}">
+                        <i class="fa fa-shopping-cart mr-2 add-to-cart-btn"></i> Thêm vào giỏ hàng
                     </a>
                     <button class="btn btn-dark" onclick="window.history.back()">
                         <i class="fa fa-arrow-left mr-2"></i> Quay lại
@@ -28,5 +28,30 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            // Khi click vào nút thêm vào giỏ hàng
+            $('.add-to-cart-btn').on('click', function(e) {
+                e.preventDefault();
+                var url = $(this).data('url');
+                addCart(url);
+            });
+        });
 
+        function addCart(url) {
+            $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    method: 'GET',
+                })
+                .done(function(response) {
+                    $('.cart-quantity').text(response.cartQuantity);
+                    alert('Thêm sản phẩm vào giỏ hàng thành công');
+                })
+                .fail(function(xhr) {
+                    console.error('Lỗi:', xhr);
+                    alert('Đã xảy ra lỗi. Vui lòng thử lại');
+                });
+        }
+    </script>
 @endsection

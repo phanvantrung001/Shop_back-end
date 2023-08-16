@@ -99,7 +99,7 @@ class CategoryPolicy
     }
     public function viewTrash(User $user)
     {
-        return $user->hasPermission('Category_viewTrash');
+        return $user->hasPermission('categories_viewTrash');
         //
     }
 }

@@ -12,17 +12,21 @@ class OrderController extends Controller
 {
     public function index()
     {  
-        $orders = Order::with('customer')->paginate(5);
-        return view('admin.orders.index',compact(['orders']));
+        $orders = Order::with('customer')->paginate(10);
+        $this->authorize('viewAny',Order::class);
+        return view('admin.orders.index',compact(['orders']));  
     }
     public function show(string $id){
-        $items = DB::table('orders')
-        ->join('customers', 'orders.customer_id', '=', 'customers.id')
-        ->join('orderdetails', 'orders.id', '=', 'orderdetails.order_id')
-        ->join('products', 'orderdetails.product_id', '=', 'products.id')
-        ->select('orders.*', 'customers.name as customer_name', 'products.name as product_name', 'products.price as product_price', 'orderdetails.*')
-        ->where('orders.customer_id', '=', $id)       
-        ->get();
-        return view('orders.show',compact('items'));
+        $items = Order::with('orderdetail','product')->findOrFail($id);
+        return view('admin.orders.show',compact('items'));
+    }
+    public function destroy($id){
+        $this->authorize('delete',Order::class);
+
+        $orders = Order::find($id);
+        $orders->delete();
+        return redirect()->route('order.index');
+        alert()->warning('Thành công');
+            return back();
     }
 }

@@ -10,7 +10,14 @@ class Product extends Model
 {
     use Notifiable;
     protected $table = 'products';
-    public function category(){
-        return $this->belongsTo(Category::class,'category_id','id');
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+        
+    }
+    public function order()
+    {
+        return $this->belongsToMany(Order::class,'orderdetails','order_id','product_id');
+        
     }
 }

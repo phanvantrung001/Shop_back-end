@@ -10,20 +10,21 @@ class RoleSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $tables = ['users', 'categories', 'products','customers','orders','orderdetails','groups'];
-        $actions = ['viewAny','view','create','update','delete','restore','forceDelete'];
-        foreach($tables as $table){
-            foreach($actions as $action){
-                $item = new Role();
-                $item->name = $table.'_'.$action;
-                $item ->group_name =$table;
-                $item ->save();
-
-            }
+{
+        // Role::truncate();
+    $tables = ['users', 'categories', 'products', 'customers', 'orders', 'orderdetails', 'groups'];
+    $actions = ['viewAny', 'view', 'create', 'update', 'delete', 'restore', 'forceDelete', 'viewTrash'];
+    
+    foreach ($tables as $table) {
+        foreach ($actions as $action) {
+            $item = new Role();
+            $item->name = $table . '_' . $action;
+            $item->group_name = $table;
+            $item->save();
         }
-        
+    }
+}
 
 
     }
-}
+

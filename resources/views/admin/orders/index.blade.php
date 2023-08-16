@@ -1,5 +1,6 @@
 @extends('admin.layout.master')
 @section('content')
+@include('sweetalert::alert')
 <main class="page-content">
 <section class="wrapper">
     <div class="panel-panel-default">
@@ -18,7 +19,6 @@
             <th scope="col">phone</th>
             <th scope="col">Địa Chỉ</th>
             <th scope="col">Ngày đặt Hàng</th>
-            <th scope="col">total</th>
             <!-- {{-- <th scope="col">Tổng Tiền(Đồng)</th> --}} -->
             <th scope="col">Tùy Chọn</th>
           </tr>
@@ -31,11 +31,16 @@
             <td>{{$order->customer->phone}}</td>
             <td>{{$order->customer->address}}</td>
             <td>{{$order->date_at}}</td>
-            <td>{{$order->total}}</td>
             <!-- {{-- <td>{{number_format($order->total)}}</td> --}} -->
             <td>
-                <a class="btn btn-primary" href="{{ route('order.show',$order->id) }}">chi tiet</a>
-
+                  <form action="{{route('order.destroy',[$order->id])}}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <button onclick="return confirm('Bạn có muốn xóa này không?');" class="btn btn-danger">xoá</button>
+                    <a href="" class="btn btn-info">Sửa</a>
+                    <a class="btn btn-primary" href="{{ route('order.show',$order->id) }}">chi tiet</a>
+                  </form>
+                
             </td>
           </tr>
           @endforeach

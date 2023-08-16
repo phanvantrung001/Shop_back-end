@@ -65,14 +65,14 @@ class CategoryController extends Controller
     }
     function trash()
     {
-        // try {
+        try {
+            $this->authorize('viewTrash',Category::class);
             $softs = Category::onlyTrashed()->get();
-            $this->authorize('viewTrash',$softs);
             return view('admin.categories.trash', compact('softs'));
-        // } catch (\Exception $e) {
-        //     alert()->warning('Lỗi');
-        //     return back();
-        // }
+        } catch (\Exception $e) {
+            alert()->warning('Không có quyền');
+            return back();
+        }
     }
     function restore(String $id)
     {

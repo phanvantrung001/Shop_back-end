@@ -18,7 +18,7 @@ class OrderPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermission('Orders_viewAny');
+        return $user->hasPermission('orders_viewAny');
         //
     }
 
@@ -31,7 +31,7 @@ class OrderPolicy
      */
     public function view(User $user, Order $order)
     {
-        return $user->hasPermission('Orders_view');
+        return $user->hasPermission('orders_view');
         //
     }
 
@@ -43,7 +43,7 @@ class OrderPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermission('Orders_create');
+        return $user->hasPermission('orders_create');
         //
     }
 
@@ -56,7 +56,7 @@ class OrderPolicy
      */
     public function update(User $user, Order $order)
     {
-        return $user->hasPermission('Orders_update');
+        return $user->hasPermission('orders_update');
         //
     }
 
@@ -69,7 +69,7 @@ class OrderPolicy
      */
     public function delete(User $user, Order $order)
     {
-        return $user->hasPermission('Orders_delete');
+        return $user->hasPermission('orders_delete');
         //
     }
 
@@ -82,7 +82,7 @@ class OrderPolicy
      */
     public function restore(User $user, Order $order)
     {
-        return $user->hasPermission('Orders_restore');
+        return $user->hasPermission('orders_restore');
         //
     }
 
@@ -95,7 +95,7 @@ class OrderPolicy
      */
     public function forceDelete(User $user, Order $order)
     {
-        return $user->hasPermission('Orders_forceDelete');
+        return $user->hasPermission('orders_forceDelete');
         //
     }
 }

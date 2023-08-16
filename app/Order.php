@@ -18,11 +18,20 @@ class Order extends Model
     protected $primaryKey = 'id';
     protected $table = 'orders';
     protected $timestamp = true;
-    public function product(){
-        return $this->belongsToMany(Product::class,'orderdetails','order_id','product_id');
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+        
     }
-    public function customer(){
-        return $this->belongsTo(Customer::class,'customer_id','id');
+    public function product()
+    {
+        return $this->belongsToMany(Product::class,'orderdetails','order_id','product_id');
+        
+    }
+    public function orderdetail()
+    {
+        return $this->hasMany(orderdetail::class, 'order_id', 'id');
+        
     }
 }
 

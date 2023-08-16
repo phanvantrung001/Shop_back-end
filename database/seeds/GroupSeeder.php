@@ -12,6 +12,7 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
+        // Group::truncate();
         $names = [
             'Admin',
             'Giám đốc',

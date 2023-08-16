@@ -23,7 +23,7 @@ class UserController extends Controller
     }
     public function create(){
         $groups = Group::get();
-        $this->authorize('viewAny',User::class);
+        $this->authorize('create',User::class);
         return view('admin.users.create',compact('groups'));
     }
     public function store(Request $request){
@@ -52,12 +52,13 @@ class UserController extends Controller
        return redirect()->route('user.index');
     }
     public function edit(String $id){
-        $this->authorize('viewAny',User::class);
+        $this->authorize('update',User::class);
 
         $user = User::find($id);
         return view('admin.users.edit',compact(['user']));
     }
     public function update(Request $request,$id){
+
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -67,11 +68,21 @@ class UserController extends Controller
     }
     
     public function destroy($id){
-        $this->authorize('viewAny',User::class);
+        $this->authorize('delete',User::class);
 
         $user = User::find($id);
         $user->delete();
         return redirect()->route('user.index');
+    }
+    function search(Request $request){
+        $name = $request->searchName;
+        $id = $request->searchId;
+        $users = User::find($id);
+        $users = User::where('name',$name)->orWhere('email',$name)->get();
+        $param = [
+            'users' => $users,  
+        ];
+        return view('admin.users.index',$param);
     }
 
 }

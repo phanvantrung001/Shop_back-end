@@ -14,12 +14,16 @@ class Orderdetail extends Model
         'order_date','delivery_date','total_amount','email','password',
     ];
     protected $primaryKey = 'id';
-    protected $table = 'orderdetail';
+    protected $table = 'orderdetails';
     protected $timestamp = true;
-    public function product(){
-        return $this->belongsToMany(Product::class, 'orderdetails', 'order_id', 'product_id');
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id', 'id');
+        
     }
-    public function order(){
-        return $this->belongsToMany(Order::class, 'orderdetails', 'product_id', 'order_id');
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+        
     }
 }

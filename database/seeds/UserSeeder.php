@@ -12,6 +12,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // User::truncate();
         $item = new User();
         $item->name = 'trung';
         $item->email = 'phanvantrung190402@gmail.com';

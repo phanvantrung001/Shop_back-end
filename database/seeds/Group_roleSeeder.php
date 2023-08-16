@@ -11,11 +11,11 @@ class Group_roleSeeder extends Seeder
      */
     public function run()
     {
-        Group_role::truncate();
-        for($i = 1; $i <= 49; $i++){
+        // Group_role::truncate();
+        for($i = 106; $i <= 161; $i++){
             $item = new Group_role();
             $item->role_id= $i;
-            $item->group_id = 1;
+            $item->group_id = 5;
             $item->save();
         }
     }

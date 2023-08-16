@@ -18,7 +18,7 @@ class GroupPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermission('group_viewAny');    }
+        return $user->hasPermission('groups_viewAny');    }
 
     /**
      * Determine whether the user can view the group.
@@ -30,7 +30,7 @@ class GroupPolicy
     public function view(User $user, Group $group)
     {
         //
-        return $user->hasPermission('group_view');
+        return $user->hasPermission('groups_view');
     }
 
     /**
@@ -42,7 +42,7 @@ class GroupPolicy
     public function create(User $user)
     {
         //
-        return $user->hasPermission('group_create');
+        return $user->hasPermission('groups_create');
     }
 
     /**
@@ -55,7 +55,7 @@ class GroupPolicy
     public function update(User $user, Group $group)
     {
         //
-        return $user->hasPermission('group_update');
+        return $user->hasPermission('groups_update');
     }
 
     /**
@@ -68,7 +68,7 @@ class GroupPolicy
     public function delete(User $user, Group $group)
     {
         //
-        return $user->hasPermission('group_delete');
+        return $user->hasPermission('groups_delete');
     }
 
     /**

@@ -90,8 +90,7 @@
                         <img class="img-fluid w-100" src="{{ asset($product->img) }}" alt="img">
                         <div class="product-action">
                             @if ($product->status == 1)
-                            <a class="btn btn-outline-dark btn-square add-to-cart-btn" 
-                            data-product-id="{{ $product->id }}" href="#"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square add-to-cart-btn" data-url="{{ route('shop.addtocart',$product->id)  }}"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="{{route('shop.show',$product->id) }}"><i class="fa fa-search"></i></a>
                             @else
                             <div class="out-of-stock-label">
@@ -129,5 +128,34 @@
     </div>
     <!-- Products End -->
 
+
+    @endsection
+    @section('scripts')
+    <script>
+        $(document).ready(function() {
+            // Khi click vào nút thêm vào giỏ hàng
+            $('.add-to-cart-btn').on('click', function(e) {
+                e.preventDefault();
+                var url = $(this).data('url');
+                addCart(url);
+            });
+        });
+
+        function addCart(url) {
+            $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    method: 'GET',
+                })
+                .done(function(response) {
+                    $('.cart-quantity').text(response.cartQuantity);
+                    alert('Thêm sản phẩm vào giỏ hàng thành công');
+                })
+                .fail(function(xhr) {
+                    console.error('Lỗi:', xhr);
+                    alert('Đã xảy ra lỗi. Vui lòng thử lại');
+                });
+        }
+    </script>
 
     @endsection

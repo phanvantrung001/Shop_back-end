@@ -10,6 +10,8 @@ class CustomerController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny',Customer::class);
+
         $customers = Customer::get();
         return view('admin.customers.index', compact('customers'));
     }

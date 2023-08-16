@@ -11,15 +11,18 @@ use Illuminate\Http\Request;
 class productController extends Controller
 {
     public function index(){   
+        $this->authorize('viewAny',Product::class);
         $products = Product::with('category')->paginate(3);
         // dd($products);
         return view('admin.products.index',compact('products'));
     }
     public function create(){
+        $this->authorize('create',Product::class);
         $categories = Category::get();
         return view('admin.products.create',compact('categories'));
     }
     public function store(StoreProductRequest $request){
+        
        $product = new Product();
        $product->name = $request->name;
        $product->slug = $request->slug;
@@ -45,8 +48,10 @@ class productController extends Controller
        return redirect()->route('product.index');
     }
     public function edit(String $id){
+        
         $categories = Category::get();
         $product = Product::find($id);
+        $this->authorize('update',$product);
         return view('admin.products.edit',compact(['product']),compact('categories'));
     }
     public function update(Request $request,$id){
@@ -76,6 +81,7 @@ class productController extends Controller
     }
     
     public function destroy($id){
+        $this->authorize('delete',Product::class);
         $product = Product::find($id);
         $product->delete();
         return redirect()->route('product.index');
